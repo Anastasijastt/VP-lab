@@ -1,2 +1,2 @@
 # VP-lab
-laboratory exercises
+laboratory exercises for web programing
