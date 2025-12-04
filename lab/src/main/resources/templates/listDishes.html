@@ -33,6 +33,7 @@
             <td th:text="${dish.name}"></td>
             <td th:text="${dish.cuisine}"></td>
             <td th:text="${dish.preparationTime} + ' min'"></td>
+            <td th:text="${dish.chef != null ? dish.chef.firstName : 'No Chef'}"></td>
 
             <td>
                 <a th:href="@{'/dishes/dish-form/' + ${dish.id}}"

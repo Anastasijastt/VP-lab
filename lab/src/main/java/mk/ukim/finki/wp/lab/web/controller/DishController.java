@@ -58,9 +58,7 @@ public class DishController {
                            @RequestParam int preparationTime,
                            @RequestParam Long chefId) {
 
-        Dish dish = dishService.create(dishId, name, cuisine, preparationTime);
-        chefService.addDishToChef(chefId, dish.getDishId());
-
+        dishService.create(dishId, name, cuisine, preparationTime, chefId);
         return "redirect:/dishes";
     }
 
@@ -72,9 +70,7 @@ public class DishController {
                            @RequestParam int preparationTime,
                            @RequestParam Long chefId) {
 
-        Dish updatedDish = dishService.update(id, dishId, name, cuisine, preparationTime);
-        chefService.addDishToChef(chefId, updatedDish.getDishId());
-
+        dishService.update(id, dishId, name, cuisine, preparationTime, chefId);
         return "redirect:/dishes";
     }
 

@@ -11,37 +11,37 @@
 
 <div class="container mt-5">
 
-    <h2 class="mb-4" th:text="${dish == null} ? 'Add New Dish' : 'Edit Dish'"></h2>
+    <h2 class="mb-4" th:text="${dish} == null ? 'Add New Dish' : 'Edit Dish'"></h2>
 
     <form method="post"
-          th:action="${dish == null} ? '/dishes/add' : '/dishes/edit/' + ${dish.id}">
+          th:action="@{${dish} == null ? '/dishes/add' : '/dishes/edit/' + ${dish.id}}">
 
         <!-- Dish ID -->
         <div class="form-group">
             <label for="dishId">Dish ID</label>
             <input type="text" class="form-control" id="dishId" name="dishId"
-                   th:value="${dish != null} ? ${dish.dishId} : ''" required>
+                   th:value="${dish != null ? dish.dishId : ''}" required>
         </div>
 
         <!-- Name -->
         <div class="form-group">
             <label for="name">Dish Name</label>
             <input type="text" class="form-control" id="name" name="name"
-                   th:value="${dish != null} ? ${dish.name} : ''" required>
+                   th:value="${dish != null ? dish.name : ''}" required>
         </div>
 
         <!-- Cuisine -->
         <div class="form-group">
             <label for="cuisine">Cuisine</label>
             <input type="text" class="form-control" id="cuisine" name="cuisine"
-                   th:value="${dish != null} ? ${dish.cuisine} : ''" required>
+                   th:value="${dish != null ? dish.cuisine : ''}" required>
         </div>
 
         <!-- Preparation Time -->
         <div class="form-group">
             <label for="preparationTime">Preparation Time (minutes)</label>
             <input type="number" class="form-control" id="preparationTime" name="preparationTime"
-                   th:value="${dish != null} ? ${dish.preparationTime} : ''" required>
+                   th:value="${dish != null ? dish.preparationTime : ''}" required>
         </div>
 
         <!-- Chef -->
@@ -51,7 +51,7 @@
                 <option value="">-- Select Chef --</option>
                 <option th:each="chef : ${chefs}"
                         th:value="${chef.id}"
-                        th:selected="${dish != null && dish.chef != null && dish.chef.id == chef.id}"
+                        th:selected="${dish != null and dish.chef != null and chef.id == dish.chef.id}"
                         th:text="${chef.firstName + ' ' + chef.lastName}">
                 </option>
             </select>

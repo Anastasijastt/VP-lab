@@ -17,22 +17,32 @@ public class ChefServiceImpl implements ChefService {
         this.chefRepository = chefRepository;
         this.dishRepository = dishRepository;
     }
+
     @Override
     public List<Chef> listChefs() {
-        return this.chefRepository.findAll();
+        return chefRepository.findAll();
     }
 
     @Override
     public Chef findById(Long id) {
-       return this.chefRepository.findById(id).orElse(null);
+        return chefRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Chef not found"));
     }
 
     @Override
-    public Chef addDishToChef(Long chefId, String dishId) {
-        Chef chef = this.chefRepository.findById(chefId).orElseThrow(() -> new RuntimeException("not found"));
-        Dish dish=this.dishRepository.findByDishId(dishId).orElseThrow(() -> new RuntimeException("not found"));
+    public Chef addDishToChef(Long chefId, Long dishId) {
+
+        Chef chef = chefRepository.findById(chefId)
+                .orElseThrow(() -> new RuntimeException("Chef not found"));
+
+        Dish dish = dishRepository.findById(dishId)
+                .orElseThrow(() -> new RuntimeException("Dish not found"));
 
         chef.getDishes().add(dish);
-        return this.chefRepository.save(chef);
+        dish.setChef(chef);
+
+        dishRepository.save(dish);
+
+        return chef;
     }
 }
