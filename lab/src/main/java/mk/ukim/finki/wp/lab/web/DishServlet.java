@@ -47,7 +47,7 @@ public class DishServlet extends HttpServlet {
 
         context.setVariable("dishes", this.dishService.listDishes());
 
-        springTemplateEngine.process("dishesList.html", context, resp.getWriter());
+        springTemplateEngine.process("listDishes.html", context, resp.getWriter());
     }
 
     @Override
@@ -72,7 +72,7 @@ public class DishServlet extends HttpServlet {
             context.setVariable("chef", selectedChef);
             context.setVariable("dishes", this.dishService.listDishes());
 
-            springTemplateEngine.process("dishesList.html", context, resp.getWriter());
+            springTemplateEngine.process("listDishes.html", context, resp.getWriter());
             return;
         }
 

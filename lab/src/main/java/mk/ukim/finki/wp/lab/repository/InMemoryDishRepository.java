@@ -20,4 +20,23 @@ public class InMemoryDishRepository implements DishRepository {
                 .filter(d->d.getDishId().equals(dishId))
                 .findFirst();
     }
+
+    @Override
+    public Optional<Dish> findById(Long id) {
+        return DataHolder.dishes.stream()
+                .filter(d->d.getId().equals(id))
+                .findFirst();
+    }
+
+    @Override
+    public Dish save(Dish dish) {
+        DataHolder.dishes.removeIf(d -> d.getId().equals(dish.getId()));
+        DataHolder.dishes.add(dish);
+        return dish;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        DataHolder.dishes.removeIf(d->d.getId().equals(id));
+    }
 }
